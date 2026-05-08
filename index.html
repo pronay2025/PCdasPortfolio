@@ -518,6 +518,64 @@
             transform: translateY(0);
             opacity: 1;
         }
+
+        /* Demo Viewer */
+        .demo-viewer {
+            position: fixed;
+            inset: 0;
+            z-index: 2000;
+            background: rgba(5, 5, 12, .95);
+            backdrop-filter: blur(15px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .4s ease;
+            padding: 2rem;
+        }
+
+        .demo-viewer.open {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .demo-viewer img {
+            max-width: 100%;
+            max-height: 90vh;
+            border-radius: 12px;
+            box-shadow: 0 20px 80px rgba(0, 0, 0, .5);
+            transform: scale(.95);
+            transition: transform .4s cubic-bezier(.34, 1.56, .64, 1);
+        }
+
+        .demo-viewer.open img {
+            transform: scale(1);
+        }
+
+        .demo-close {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, .1);
+            border: 1px solid rgba(255, 255, 255, .2);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all .2s;
+            z-index: 10;
+        }
+
+        .demo-close:hover {
+            background: var(--accent);
+            color: #09090f;
+            transform: rotate(90deg);
+        }
     </style>
 </head>
 
@@ -590,10 +648,12 @@
                         <a href="#contact" class="btn-outline">Contact Me</a>
                     </div>
                     <div class="flex items-center gap-6 reveal" style="transition-delay:.5s;">
-                        <a href="#" class="text-muted hover:text-accent transition-colors" style="color:var(--muted);"
+                        <a href="javascript:void(0)" onclick="showPrivateMsg()"
+                            class="text-muted hover:text-accent transition-colors" style="color:var(--muted);"
                             onmouseover="this.style.color='var(--accent)'"
                             onmouseout="this.style.color='var(--muted)'"><i class="fab fa-github fa-lg"></i></a>
-                        <a href="#" class="text-muted hover:text-accent transition-colors" style="color:var(--muted);"
+                        <a href="https://www.linkedin.com/in/pronay-das-324b42273"
+                            class="text-muted hover:text-accent transition-colors" style="color:var(--muted);"
                             onmouseover="this.style.color='var(--accent)'"
                             onmouseout="this.style.color='var(--muted)'"><i class="fab fa-linkedin fa-lg"></i></a>
                         <a href="#" class="text-muted hover:text-accent transition-colors" style="color:var(--muted);"
@@ -803,12 +863,12 @@
                             style="font-size:.75rem;color:var(--muted);font-family:'Syne',sans-serif;letter-spacing:.08em;margin-bottom:1rem;">
                             SOCIAL</div>
                         <div style="display:flex;gap:1rem;">
-                            <a href="#"
+                            <a href="javascript:void(0)" onclick="showPrivateMsg()"
                                 style="width:40px;height:40px;border-radius:10px;background:rgba(255,255,255,.04);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--muted);transition:all .3s;"
                                 onmouseover="this.style.color='var(--accent)';this.style.borderColor='var(--accent)'"
                                 onmouseout="this.style.color='var(--muted)';this.style.borderColor='var(--border)'"><i
                                     class="fab fa-github"></i></a>
-                            <a href="#"
+                            <a href="https://www.linkedin.com/in/pronay-das-324b42273"
                                 style="width:40px;height:40px;border-radius:10px;background:rgba(255,255,255,.04);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--muted);transition:all .3s;"
                                 onmouseover="this.style.color='var(--accent)';this.style.borderColor='var(--accent)'"
                                 onmouseout="this.style.color='var(--muted)';this.style.borderColor='var(--border)'"><i
@@ -885,6 +945,14 @@
         </div>
     </div>
 
+    <!-- Demo Image Viewer -->
+    <div class="demo-viewer" id="demoViewer" onclick="closeDemoImage()">
+        <button class="demo-close" onclick="closeDemoImage()">
+            <i class="fa fa-times"></i>
+        </button>
+        <img id="demoImageTag" src="" alt="Project Demo">
+    </div>
+
     <!-- Toast -->
     <div class="toast" id="toast"><i class="fa fa-check-circle"></i> <span id="toastMsg">Message sent!</span></div>
 
@@ -927,57 +995,62 @@
             {
                 title: "Bangladesh Container Lines Ltd.(BCLMSL)",
                 desc: "Shipping Agency Company Website",
-                longDesc: "",
+                longDesc: "Bangladesh Container Lines Ltd. is a leading shipping agency providing comprehensive logistics and container management services. The platform features real-time tracking, service management, and a robust communication gateway.",
                 icon: "🚢",
                 gradient: "linear-gradient(135deg, #0d1a2a, #0a1a0f)",
                 tags: ["Bootstrap", "Jquery", "Laravel", "MySQL"],
                 features: ["Service Page", "About Page", "Contact Page", "Company Activity Page"],
                 link: "#",
-                github: "#"
+                github: "#",
+                demoImage: "assets/bcl.png"
             },
             {
                 title: "Vehicle Management System",
                 desc: "Vehicle Management System",
-                longDesc: "Vehicle Management System is a comprehensive system for managing vehicle information, maintenance, and operations.",
+                longDesc: "Vehicle Management System is a comprehensive system for managing vehicle information, maintenance, and operations. It helps organizations track fuel consumption, service schedules, and driver assignments in one place.",
                 icon: "🚗",
                 gradient: "linear-gradient(135deg, #1a0d2a, #0a0a1a)",
                 tags: ["Laravel", "MySQL", "bootstrap", "Jquery"],
                 features: ["User Request Form", "Vehicle Maintenance", "Approval Path", "Admin analytics panel"],
                 link: "#",
-                github: "#"
+                github: "#",
+                demoImage: "assets/Vehicle.png"
             },
             {
                 title: "Minutes Of Meetings",
                 desc: "Minutes Of Meetings",
-                longDesc: "Minutes Of Meetings is a comprehensive system for managing meeting minutes.",
+                longDesc: "Minutes Of Meetings is a comprehensive system for managing meeting minutes. It provides a structured way to record discussions, assign tasks, and track progress on action items from every meeting.",
                 icon: "📚",
                 gradient: "linear-gradient(135deg, #0a1a1a, #0d1a2a)",
                 tags: ["Laravel", "MySQL", "Javascript", "Bootstrap"],
                 features: ["Meeting Minutes", "User Management", "Progress tracking", "Deadline tracking", "Notification System", "PDF generation"],
                 link: "#",
-                github: "#"
+                github: "#",
+                demoImage: "assets/MOM.png"
             },
             {
                 title: "Ishat Group Website",
                 desc: "Shipping Agency Company Website",
-                longDesc: "Ishat Group Website is a comprehensive website for Ishat Group.",
+                longDesc: "Ishat Group Website is a comprehensive website for Ishat Group. It showcases the group's diverse business interests and provides a central hub for client interactions and service inquiries.",
                 icon: "🚢",
                 gradient: "linear-gradient(135deg, #0a1a10, #1a2a0a)",
                 tags: ["React", "Laravel", "WebRTC", "MySQL", "Twilio"],
                 features: ["Service Page", "About Page", "Contact Page", "Company Activity Page"],
                 link: "#",
-                github: "#"
+                github: "#",
+                demoImage: ""
             },
             {
                 title: "Employee Monitor System",
                 desc: "Employee Monitor System",
-                longDesc: "Employee Monitor System is a comprehensive system for monitoring employee activities.",
+                longDesc: "Employee Monitor System is a comprehensive system for monitoring employee activities and productivity. It features real-time attendance tracking, activity logging, and automated reporting.",
                 icon: "📋",
                 gradient: "linear-gradient(135deg, #1a1a0a, #2a1a0a)",
                 tags: ["React", "Laravel", "WebSockets", "MySQL", "Redis"],
                 features: ["Dispaly employee list", "Show attendance timeline", "Employee list auto change every 10 sec."],
                 link: "#",
-                github: "#"
+                github: "#",
+                demoImage: "assets/Employee Monitoring.png"
             },
             {
                 title: "smsbcontg-llc",
@@ -988,19 +1061,22 @@
                 tags: ["Laravel", "MySQL", "Bootstrap", "Jquery"],
                 features: ["Service Page", "About Page", "Contact Page", "Company Activity Page"],
                 link: "#",
-                github: "#"
+                github: "#",
+                demoImage: ""
             },
             {
-                title: "GatePass",
-                desc: "GatePass is a comprehensive system for managing gate passes.",
-                longDesc: "GatePass is a comprehensive system for managing gate passes. It includes role based authentication, notification system, pdf generation, and reports.",
-                icon: "🚪",
+                title: "Birthday Display",
+                desc: "Birthday Display System",
+                longDesc: "Employee Birthday Management System",
+                icon: "🎂",
                 gradient: "linear-gradient(135deg, #2a0a0a, #1a0a1a)",
                 tags: ["Laravel", "MySQL", "Bootstrap", "Jquery"],
-                features: ["Role based authentication", "Notification system", "Pdf generation", "Reports"],
+                features: ["auto change every 10 sec."],
                 link: "#",
-                github: "#"
+                github: "#",
+                demoImage: "assets/birthday.jpeg"
             }
+
         ];
 
         // Render experiences
@@ -1067,6 +1143,10 @@
         // Modal
         function openModal(i) {
             const p = projects[i];
+            const demoBtn = p.demoImage
+                ? `<button onclick="showDemoImage('${p.demoImage}')" class="btn-primary" style="flex:1;justify-content:center;min-width:140px;"><i class="fa fa-image"></i> Live Demo</button>`
+                : `<button onclick="showUnavailableMsg()" class="btn-primary" style="flex:1;justify-content:center;min-width:140px;"><i class="fa fa-external-link-alt"></i> Live Demo</button>`;
+
             document.getElementById('modalContent').innerHTML = `
     <div class="project-img" style="background:${p.gradient};border-radius:20px 20px 0 0;height:180px;">
       <span style="font-size:4.5rem;">${p.icon}</span>
@@ -1084,8 +1164,8 @@
         ${p.tags.map(t => `<span class="tech-tag">${t}</span>`).join('')}
       </div>
       <div style="display:flex;gap:1rem;flex-wrap:wrap;">
-        <a href="${p.link}" class="btn-primary" style="flex:1;justify-content:center;min-width:140px;"><i class="fa fa-external-link-alt"></i> Live Demo</a>
-        <a href="${p.github}" class="btn-outline" style="flex:1;justify-content:center;min-width:140px;"><i class="fab fa-github"></i> GitHub</a>
+        ${demoBtn}
+        <button onclick="showPrivateMsg()" class="btn-outline" style="flex:1;justify-content:center;min-width:140px;"><i class="fab fa-github"></i> GitHub</button>
       </div>
     </div>
   `;
@@ -1098,6 +1178,18 @@
         }
         function closeModalOutside(e) {
             if (e.target === document.getElementById('projectModal')) closeModal();
+        }
+
+        // Demo Image Viewer
+        function showDemoImage(src) {
+            const viewer = document.getElementById('demoViewer');
+            const img = document.getElementById('demoImageTag');
+            img.src = src;
+            viewer.classList.add('open');
+            // Keep main modal open but hide scroll
+        }
+        function closeDemoImage() {
+            document.getElementById('demoViewer').classList.remove('open');
         }
 
         // Form
@@ -1121,8 +1213,25 @@
                 }
             });
             if (valid) {
-                showToast('Message sent successfully! 🎉');
+                const name = document.getElementById('fname').value;
+                const email = document.getElementById('femail').value;
+                const mobile = document.getElementById('fmobile').value;
+                const msg = document.getElementById('fmsg').value;
+
+                const whatsappMsg = `Hi Pronay,\n\nI'm ${name}.\nEmail: ${email}\nMobile: ${mobile}\n\nMessage: ${msg}`;
+                const encodedMsg = encodeURIComponent(whatsappMsg);
+                const whatsappUrl = `https://wa.me/8801837457721?text=${encodedMsg}`;
+
+                // Show success notification first
+                showToast('Message sent successfully! Redirecting to WhatsApp... 🎉');
+
+                // Reset form
                 e.target.reset();
+
+                // Redirect after a short delay so user sees the message
+                setTimeout(() => {
+                    window.open(whatsappUrl, '_blank');
+                }, 1000);
             }
         }
 
@@ -1132,6 +1241,14 @@
             document.getElementById('toastMsg').textContent = msg;
             t.classList.add('show');
             setTimeout(() => t.classList.remove('show'), 3500);
+        }
+
+        function showPrivateMsg() {
+            showToast('-sorry, Source code private');
+        }
+
+        function showUnavailableMsg() {
+            showToast('currently unavailable due to hosting/server issues');
         }
 
         // Nav toggle
